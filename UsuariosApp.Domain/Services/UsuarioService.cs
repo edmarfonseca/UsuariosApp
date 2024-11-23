@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UsuariosApp.Domain.Dtos;
 using UsuariosApp.Domain.Entities;
 using UsuariosApp.Domain.Helpers;
@@ -29,11 +24,8 @@ namespace UsuariosApp.Domain.Services
 
         public CriarUsuarioResponseDto CriarUsuario(CriarUsuarioRequestDto dto)
         {
-            #region Capturando e validando os dados do usuário
-
             var usuario = new Usuario
             {
-                Id = Guid.NewGuid(),
                 Nome = dto.Nome,
                 Email = dto.Email,
                 Senha = dto.Senha
@@ -44,34 +36,16 @@ namespace UsuariosApp.Domain.Services
 
             if (!result.IsValid)
                 throw new ValidationException(result.Errors);
-
-            #endregion
-
-            #region Regra: Não permitir o cadastro de usuários com o mesmo email
-
+           
             if (_usuarioRepository.Verify(usuario.Email))
                 throw new ApplicationException("O email informado já está cadastrado, tente outro.");
-
-            #endregion
-
-            #region Regra: A senha do usuário deve ser criptografada
-
+                        
             usuario.Senha = SHA256Helper.Encrypt(usuario.Senha);
-
-            #endregion
-
-            #region Regra: O usuário deverá ser associado ao perfil OPERADOR
-
+            
             var perfil = _perfilRepository.ObterPorNome("OPERADOR");
             usuario.PerfilId = perfil.Id;
 
-            #endregion
-
-            #region Gravar o usuário no banco de dados
-
             _usuarioRepository.Add(usuario);
-
-            #endregion
 
             return new CriarUsuarioResponseDto
             {
@@ -89,18 +63,10 @@ namespace UsuariosApp.Domain.Services
 
         public AutenticarUsuarioResponseDto AutenticarUsuario(AutenticarUsuarioRequestDto dto)
         {
-            #region Consultar o usuário no banco de dados através do email e da senha
-
             var usuario = _usuarioRepository.Find(dto.Email, SHA256Helper.Encrypt(dto.Senha));
-
-            #endregion
-
-            #region Verificando se o usuário não foi encontrado
 
             if (usuario == null)
                 throw new ApplicationException("Acesso negado. Usuário inválido.");
-
-            #endregion
 
             return new AutenticarUsuarioResponseDto
             {

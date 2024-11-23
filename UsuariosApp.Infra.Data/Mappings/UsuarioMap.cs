@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UsuariosApp.Domain.Entities;
 
 namespace UsuariosApp.Infra.Data.Mappings
@@ -42,14 +37,11 @@ namespace UsuariosApp.Infra.Data.Mappings
                 .HasColumnName("PERFIL_ID")
                 .IsRequired();
 
-            #region Chaves estrangeiras
 
             builder.HasOne(u => u.Perfil) //Usuário TEM 1 Perfil
                 .WithMany(p => p.Usuarios) //Perfil TEM Muitos Usuários
                 .HasForeignKey(u => u.PerfilId) //Chave estrangeira
                 .OnDelete(DeleteBehavior.Restrict);
-
-            #endregion
         }
     }
 }

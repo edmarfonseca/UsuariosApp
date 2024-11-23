@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UsuariosApp.Infra.Security.Settings
+﻿namespace UsuariosApp.Infra.Security.Settings
 {
     public class JwtTokenSettings
     {

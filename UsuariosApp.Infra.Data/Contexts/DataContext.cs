@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UsuariosApp.Domain.Entities;
 using UsuariosApp.Infra.Data.Mappings;
 
 namespace UsuariosApp.Infra.Data.Contexts
@@ -12,8 +8,10 @@ namespace UsuariosApp.Infra.Data.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //configuração com o banco de dados do SqlServer
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BDUsuarios;Integrated Security=True;");
+            var connectionString = "Server=localhost;Database=factousersdb;Uid=developer;Pwd='1234567'";
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 40));
+
+            optionsBuilder.UseMySql(connectionString, serverVersion);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,6 +21,11 @@ namespace UsuariosApp.Infra.Data.Contexts
             modelBuilder.ApplyConfiguration(new PerfilPermissaoMap());
             modelBuilder.ApplyConfiguration(new PermissaoMap());
             modelBuilder.ApplyConfiguration(new UsuarioMap());
+
+            modelBuilder.Entity<Perfil>().HasData(
+                new Perfil { Id = 1, Nome = "OPERADOR" },
+                new Perfil { Id = 2, Nome = "ADMINISTRADOR" }
+            );
         }
     }
 }

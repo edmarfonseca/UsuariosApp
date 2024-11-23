@@ -17,22 +17,24 @@ namespace UsuariosApp.Infra.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("UsuariosApp.Domain.Entities.Perfil", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("ID");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)")
+                        .HasColumnType("varchar(25)")
                         .HasColumnName("NOME");
 
                     b.HasKey("Id");
@@ -41,16 +43,28 @@ namespace UsuariosApp.Infra.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("TB_PERFIL", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nome = "OPERADOR"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nome = "ADMINISTRADOR"
+                        });
                 });
 
             modelBuilder.Entity("UsuariosApp.Domain.Entities.PerfilPermissao", b =>
                 {
-                    b.Property<Guid>("PerfilId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("PerfilId")
+                        .HasColumnType("int")
                         .HasColumnName("PERFIL_ID");
 
-                    b.Property<Guid>("PermissaoId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("PermissaoId")
+                        .HasColumnType("int")
                         .HasColumnName("PERMISSAO_ID");
 
                     b.HasKey("PerfilId", "PermissaoId");
@@ -62,15 +76,17 @@ namespace UsuariosApp.Infra.Data.Migrations
 
             modelBuilder.Entity("UsuariosApp.Domain.Entities.Permissao", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("ID");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("NOME");
 
                     b.HasKey("Id");
@@ -80,32 +96,34 @@ namespace UsuariosApp.Infra.Data.Migrations
 
             modelBuilder.Entity("UsuariosApp.Domain.Entities.Usuario", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("ID");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasColumnName("EMAIL");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)")
+                        .HasColumnType("varchar(150)")
                         .HasColumnName("NOME");
 
-                    b.Property<Guid?>("PerfilId")
+                    b.Property<int?>("PerfilId")
                         .IsRequired()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("PERFIL_ID");
 
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasColumnName("SENHA");
 
                     b.HasKey("Id");

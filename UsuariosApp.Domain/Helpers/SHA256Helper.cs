@@ -1,12 +1,9 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 namespace UsuariosApp.Domain.Helpers
 {
-    /// <summary>
-    /// Classe auxiliar para criptografia padrão SHA256
-    /// </summary>
+    
     public class SHA256Helper
     {
         public static string Encrypt(string value)

@@ -3,16 +3,10 @@ using UsuariosApp.Domain.Entities;
 
 namespace UsuariosApp.Domain.Validations
 {
-    /// <summary>
-    /// Classe para validação dos dados do usuário
-    /// </summary>
     public class UsuarioValidator : AbstractValidator<Usuario>
     {
         public UsuarioValidator()
         {
-            RuleFor(u => u.Id)
-                .NotEmpty().WithMessage("O id do usuário é obrigatório");
-
             RuleFor(u => u.Nome)
                 .NotEmpty().WithMessage("O nome do usuário é obrigatório.")
                 .Length(6, 100).WithMessage("Informe o nome de 6 a 100 caracteres.");

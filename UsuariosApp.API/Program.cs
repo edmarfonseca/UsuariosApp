@@ -1,9 +1,4 @@
-using UsuariosApp.Domain.Interfaces.Repositories;
-using UsuariosApp.Domain.Interfaces.Security;
-using UsuariosApp.Domain.Interfaces.Services;
-using UsuariosApp.Domain.Services;
-using UsuariosApp.Infra.Data.Repositories;
-using UsuariosApp.Infra.Security.Services;
+using UsuariosApp.API.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,28 +7,19 @@ builder.Services.AddRouting(map => { map.LowercaseUrls = true; });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-#region Injeções de dependência
+builder.Services.AddDependencyInjection();
 
-builder.Services.AddTransient<IUsuarioService, UsuarioService>();
-builder.Services.AddTransient<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddTransient<IPerfilRepository, PerfilRepository>();
-builder.Services.AddTransient<IJwtTokenService, JwtTokenService>();
-
-#endregion
-
-#region Configuração do CORS
+var userPolicy = "UsuariosPolicy";
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("UsuariosPolicy", builder =>
+    options.AddPolicy(userPolicy, builder =>
     {
         builder.WithOrigins("http://localhost:4200")
                .AllowAnyMethod()
                .AllowAnyHeader();
     });
 });
-
-#endregion
 
 var app = builder.Build();
 
@@ -43,7 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("UsuariosPolicy");
+app.UseCors(userPolicy);
 
 app.UseAuthorization();
 app.MapControllers();

@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UsuariosApp.Domain.Entities;
 
 namespace UsuariosApp.Infra.Data.Mappings
@@ -24,7 +19,6 @@ namespace UsuariosApp.Infra.Data.Mappings
             builder.Property(p => p.PermissaoId)
                 .HasColumnName("PERMISSAO_ID");
 
-            #region Chaves estrangeiras
 
             builder.HasOne(p => p.Perfil) //PerfilPermissao TEM 1 Perfil
                 .WithMany(p => p.Permissoes) //Perfil TEM MUITOS PerfilPermissao
@@ -35,8 +29,6 @@ namespace UsuariosApp.Infra.Data.Mappings
                 .WithMany(p => p.Perfis) //Permissao TEM MUITOS PerfilPermissao
                 .HasForeignKey(p => p.PermissaoId) //Chave estrangeira
                 .OnDelete(DeleteBehavior.Restrict);
-
-            #endregion
         }
     }
 }

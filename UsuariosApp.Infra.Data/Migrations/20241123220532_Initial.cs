@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace UsuariosApp.Infra.Data.Migrations
 {
@@ -11,39 +13,52 @@ namespace UsuariosApp.Infra.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
                 name: "TB_PERFIL",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NOME = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NOME = table.Column<string>(type: "varchar(25)", maxLength: 25, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TB_PERFIL", x => x.ID);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "TB_PERMISSAO",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NOME = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NOME = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TB_PERMISSAO", x => x.ID);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "TB_USUARIO",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NOME = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    EMAIL = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    SENHA = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    PERFIL_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NOME = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    EMAIL = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SENHA = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PERFIL_ID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,14 +69,15 @@ namespace UsuariosApp.Infra.Data.Migrations
                         principalTable: "TB_PERFIL",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "TB_PERFIL_PERMISSAO",
                 columns: table => new
                 {
-                    PERFIL_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PERMISSAO_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    PERFIL_ID = table.Column<int>(type: "int", nullable: false),
+                    PERMISSAO_ID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,6 +94,16 @@ namespace UsuariosApp.Infra.Data.Migrations
                         principalTable: "TB_PERMISSAO",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "TB_PERFIL",
+                columns: new[] { "ID", "NOME" },
+                values: new object[,]
+                {
+                    { 1, "OPERADOR" },
+                    { 2, "ADMINISTRADOR" }
                 });
 
             migrationBuilder.CreateIndex(
