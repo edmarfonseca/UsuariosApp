@@ -12,23 +12,26 @@ namespace UsuariosApp.Domain.Services
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
-        private readonly IPerfilRepository _perfilRepository;
+        private readonly IClienteRepository _clienteRepository;
+        private readonly IUsuarioPerfilRepository _usuarioPerfilRepository;
         private readonly IJwtTokenService _jwtTokenService;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, IPerfilRepository perfilRepository, IJwtTokenService jwtTokenService)
+        public UsuarioService(IUsuarioRepository usuarioRepository, IClienteRepository clienteRepository, IUsuarioPerfilRepository usuarioPerfilRepository, IJwtTokenService jwtTokenService)
         {
             _usuarioRepository = usuarioRepository;
-            _perfilRepository = perfilRepository;
+            _clienteRepository = clienteRepository;
+            _usuarioPerfilRepository = usuarioPerfilRepository;
             _jwtTokenService = jwtTokenService;
         }
 
-        public CriarUsuarioResponseDto CriarUsuario(CriarUsuarioRequestDto dto)
+        public CriarUsuarioResponse CriarUsuario(CriarUsuarioRequest dto)
         {
             var usuario = new Usuario
             {
                 Nome = dto.Nome,
                 Email = dto.Email,
-                Senha = dto.Senha
+                Senha = dto.Senha,
+                ClienteId = dto.ClienteId
             };
 
             var validator = new UsuarioValidator();
@@ -36,39 +39,64 @@ namespace UsuariosApp.Domain.Services
 
             if (!result.IsValid)
                 throw new ValidationException(result.Errors);
-           
+
             if (_usuarioRepository.Verify(usuario.Email))
-                throw new ApplicationException("O email informado já está cadastrado, tente outro.");
-                        
+                throw new ApplicationException("O e-mail informado já existe.");
+
+            var cliente = _clienteRepository.Get(usuario.ClienteId);
+
+            if (cliente == null)
+                throw new ApplicationException("Cliente não encontrado.");
+
+            usuario.Cliente = cliente;
             usuario.Senha = SHA256Helper.Encrypt(usuario.Senha);
-            
-            var perfil = _perfilRepository.ObterPorNome("OPERADOR");
-            usuario.PerfilId = perfil.Id;
 
             _usuarioRepository.Add(usuario);
 
-            return new CriarUsuarioResponseDto
+            return new CriarUsuarioResponse
             {
                 Id = usuario.Id,
                 Nome = usuario.Nome,
                 Email = usuario.Email,
-                DataHoraCadastro = DateTime.Now,
-                Perfil = new PerfilResponseDto
+                DataInclusao = usuario.DataInclusao,
+                Cliente = new ClienteResponse
                 {
-                    Id = perfil.Id,
-                    Nome = perfil.Nome
+                    Id = cliente.Id,
+                    Nome = cliente.Nome,
+                    CpfCnpj = cliente.CpfCnpj
                 }
             };
         }
 
-        public AutenticarUsuarioResponseDto AutenticarUsuario(AutenticarUsuarioRequestDto dto)
+        public AutenticarUsuarioResponse AutenticarUsuario(AutenticarUsuarioRequest dto)
         {
             var usuario = _usuarioRepository.Find(dto.Email, SHA256Helper.Encrypt(dto.Senha));
 
             if (usuario == null)
-                throw new ApplicationException("Acesso negado. Usuário inválido.");
+                throw new ApplicationException("E-mail/Senha incorretos.");
 
-            return new AutenticarUsuarioResponseDto
+            var perfis = _usuarioPerfilRepository.Get(usuario);
+
+            var response = new List<UsuarioPerfisResponse>();
+
+            foreach (UsuarioPerfil perfil in perfis)
+            {
+                response.Add(
+                    new UsuarioPerfisResponse
+                    {
+                        Id = perfil.ClienteSistema.Sistema.Id,
+                        Nome = perfil.ClienteSistema.Sistema.Nome,
+                        Codigo = perfil.ClienteSistema.Sistema.Codigo,
+                        Perfil = new PerfilResponse
+                        {
+                            Id = perfil.Perfil.Id,
+                            Nome = perfil.Perfil.Nome
+                        }
+                    }
+                    );
+            }
+
+            return new AutenticarUsuarioResponse
             {
                 Id = usuario.Id,
                 Nome = usuario.Nome,
@@ -76,11 +104,7 @@ namespace UsuariosApp.Domain.Services
                 DataHoraAcesso = DateTime.Now,
                 DataHoraExpiracao = _jwtTokenService.GenerateExpirationDate(),
                 AccessToken = _jwtTokenService.GenerateToken(usuario),
-                Perfil = new PerfilResponseDto
-                {
-                    Id = usuario.Perfil.Id,
-                    Nome = usuario.Perfil.Nome
-                }
+                Sistemas = response
             };
         }
     }

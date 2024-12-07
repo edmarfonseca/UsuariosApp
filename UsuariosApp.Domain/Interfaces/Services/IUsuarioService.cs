@@ -4,7 +4,7 @@ namespace UsuariosApp.Domain.Interfaces.Services
 {
     public interface IUsuarioService
     {
-        CriarUsuarioResponseDto CriarUsuario(CriarUsuarioRequestDto dto);
-        AutenticarUsuarioResponseDto AutenticarUsuario(AutenticarUsuarioRequestDto dto);
+        CriarUsuarioResponse CriarUsuario(CriarUsuarioRequest dto);
+        AutenticarUsuarioResponse AutenticarUsuario(AutenticarUsuarioRequest dto);
     }
 }

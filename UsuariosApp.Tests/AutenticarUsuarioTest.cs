@@ -19,7 +19,7 @@ namespace UsuariosApp.Tests
         {
             var faker = new Faker("pt_BR");
 
-            var requestCriarUsuario = new CriarUsuarioRequestDto
+            var requestCriarUsuario = new CriarUsuarioRequest
             {
                 Nome = faker.Person.FullName,
                 Email = faker.Internet.Email(),
@@ -33,7 +33,7 @@ namespace UsuariosApp.Tests
             var client = new WebApplicationFactory<Program>().CreateClient();
             await client.PostAsync("/api/usuarios/criar", jsonCriarUsuario);
 
-            var requestAutenticarUsuario = new AutenticarUsuarioRequestDto
+            var requestAutenticarUsuario = new AutenticarUsuarioRequest
             {
                 Email = requestCriarUsuario.Email,
                 Senha = requestCriarUsuario.Senha
@@ -55,7 +55,7 @@ namespace UsuariosApp.Tests
         {
             var faker = new Faker("pt_BR");
 
-            var request = new AutenticarUsuarioRequestDto
+            var request = new AutenticarUsuarioRequest
             {
                 Email = faker.Internet.Email(),
                 Senha = "@Teste2024"

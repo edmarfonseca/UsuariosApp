@@ -7,13 +7,14 @@ using UsuariosApp.Infra.Security.Services;
 
 namespace UsuariosApp.API.Configurations
 {
-    public static class DependencyInjectionConfiguration
+    public static class DIConfiguration
     {
         public static void AddDependencyInjection(this IServiceCollection services)
         {
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
-            services.AddTransient<IPerfilRepository, PerfilRepository>();
+            services.AddTransient<IClienteRepository, ClienteRepository>();
+            services.AddTransient<IUsuarioPerfilRepository, UsuarioPerfilRepository>();
             services.AddTransient<IJwtTokenService, JwtTokenService>();
         }
     }

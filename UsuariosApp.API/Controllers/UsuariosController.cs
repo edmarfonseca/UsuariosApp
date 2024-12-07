@@ -17,8 +17,8 @@ namespace UsuariosApp.API.Controllers
         }
 
         [HttpPost("criar")]
-        [ProducesResponseType(typeof(CriarUsuarioResponseDto), 201)]
-        public IActionResult Criar([FromBody] CriarUsuarioRequestDto dto)
+        [ProducesResponseType(typeof(CriarUsuarioResponse), 201)]
+        public IActionResult Criar([FromBody] CriarUsuarioRequest dto)
         {
             try
             {
@@ -39,8 +39,8 @@ namespace UsuariosApp.API.Controllers
         }
 
         [HttpPost("autenticar")]
-        [ProducesResponseType(typeof(AutenticarUsuarioResponseDto), 200)]
-        public IActionResult Autenticar([FromBody] AutenticarUsuarioRequestDto dto)
+        [ProducesResponseType(typeof(AutenticarUsuarioResponse), 200)]
+        public IActionResult Autenticar([FromBody] AutenticarUsuarioRequest dto)
         {
             try
             {

@@ -1,11 +1,12 @@
 ﻿namespace UsuariosApp.Domain.Entities
 {
-    public class Perfil
+    public class Perfil : EntityBase
     {
-        public int Id { get; set; }
         public string? Nome { get; set; }
+        public int SistemaId { get; set; }
 
-        public ICollection<Usuario>? Usuarios { get; set; }
-        public ICollection<PerfilPermissao>? Permissoes { get; set; }
+        public Sistema? Sistema {  get; set; }
+        public ICollection<PerfilApi>? Apis { get; set; }
+        public ICollection<UsuarioPerfil>? Usuarios { get; set; }
     }
 }

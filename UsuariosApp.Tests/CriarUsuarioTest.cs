@@ -23,7 +23,7 @@ namespace UsuariosApp.Tests
         {
             var faker = new Faker("pt_BR");
 
-            var request = new CriarUsuarioRequestDto
+            var request = new CriarUsuarioRequest
             {
                 Nome = faker.Person.FullName,
                 Email = faker.Internet.Email(),
@@ -44,7 +44,7 @@ namespace UsuariosApp.Tests
         {
             var faker = new Faker("pt_BR");
 
-            var request = new CriarUsuarioRequestDto
+            var request = new CriarUsuarioRequest
             {
                 Nome = faker.Person.FullName,
                 Email = faker.Internet.Email(),

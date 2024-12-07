@@ -4,11 +4,11 @@ using UsuariosApp.Domain.Entities;
 
 namespace UsuariosApp.Infra.Data.Mappings
 {
-    public class PerfilMap : IEntityTypeConfiguration<Perfil>
+    public class ApiMap : IEntityTypeConfiguration<Api>
     {
-        public void Configure(EntityTypeBuilder<Perfil> builder)
+        public void Configure(EntityTypeBuilder<Api> builder)
         {
-            builder.ToTable("TB_PERFIL");
+            builder.ToTable("TB_API");
 
             builder.HasKey(t => t.Id);
 
@@ -17,19 +17,24 @@ namespace UsuariosApp.Infra.Data.Mappings
 
             builder.Property(t => t.Nome)
                 .HasColumnName("NOME")
-                .HasMaxLength(25)
+                .HasMaxLength(50)
                 .IsRequired();
+
+            builder.Property(t => t.Uri)
+               .HasColumnName("URI")
+               .HasMaxLength(250)
+               .IsRequired();
 
             builder.Property(t => t.SistemaId)
                 .HasColumnName("SISTEMA_ID")
                 .IsRequired();
 
 
-            builder.HasIndex(t => new { t.Nome, t.SistemaId })
+            builder.HasIndex(t => t.Uri)
                 .IsUnique();
 
-            builder.HasOne(t => t.Sistema) //Perfil TEM 1 Sistema
-                .WithMany(t => t.Perfis) //Sistema TEM MUITOS Perfil
+            builder.HasOne(t => t.Sistema) //Api TEM 1 Sistema
+                .WithMany(t => t.Apis) //Sistema TEM MUITOS Api
                 .HasForeignKey(t => t.SistemaId) //Chave estrangeira
                 .OnDelete(DeleteBehavior.Restrict);
         }

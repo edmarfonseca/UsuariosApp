@@ -10,37 +10,37 @@ namespace UsuariosApp.Infra.Data.Mappings
         {
             builder.ToTable("TB_USUARIO");
 
-            builder.HasKey(u => u.Id);
+            builder.HasKey(t => t.Id);
 
-            builder.Property(u => u.Id)
+            builder.Property(t => t.Id)
                 .HasColumnName("ID");
 
-            builder.Property(u => u.Nome)
+            builder.Property(t => t.Nome)
                 .HasColumnName("NOME")
                 .HasMaxLength(150)
                 .IsRequired();
 
-            builder.Property(u => u.Email)
+            builder.Property(t => t.Email)
                 .HasColumnName("EMAIL")
                 .HasMaxLength(100)
-                .IsRequired();
+                .IsRequired();            
 
-            builder.HasIndex(u => u.Email)
-                .IsUnique();
-
-            builder.Property(u => u.Senha)
+            builder.Property(t => t.Senha)
                 .HasColumnName("SENHA")
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(u => u.PerfilId)
-                .HasColumnName("PERFIL_ID")
+            builder.Property(t => t.ClienteId)
+                .HasColumnName("CLIENTE_ID")
                 .IsRequired();
 
 
-            builder.HasOne(u => u.Perfil) //Usuário TEM 1 Perfil
-                .WithMany(p => p.Usuarios) //Perfil TEM Muitos Usuários
-                .HasForeignKey(u => u.PerfilId) //Chave estrangeira
+            builder.HasIndex(t => t.Email)
+                .IsUnique();
+
+            builder.HasOne(t => t.Cliente) //Usuário TEM 1 Cliente
+                .WithMany(t => t.Usuarios) //Cliente TEM Muitos Usuários
+                .HasForeignKey(t => t.ClienteId) //Chave estrangeira
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

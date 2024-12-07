@@ -9,7 +9,7 @@ namespace UsuariosApp.Domain.Validations
         {
             RuleFor(u => u.Nome)
                 .NotEmpty().WithMessage("O nome do usuário é obrigatório.")
-                .Length(6, 100).WithMessage("Informe o nome de 6 a 100 caracteres.");
+                .MaximumLength(150).WithMessage("O nome do usuário deve conter, no máximo, 150 caracteres.");
 
             RuleFor(u => u.Email)
                 .NotEmpty().WithMessage("O email do usuário é obrigatório.")
@@ -18,7 +18,7 @@ namespace UsuariosApp.Domain.Validations
             RuleFor(u => u.Senha)
                 .NotEmpty().WithMessage("A senha do usuário é obrigatória.")
                 .Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
-                    .WithMessage("A senha deve ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e símbolos.");
+                    .WithMessage("A senha deve conter, pelo menos, 8 caracteres, incluindo letras maiúsculas, minúsculas, números e símbolos.");
         }
     }
 }

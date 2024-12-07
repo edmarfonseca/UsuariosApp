@@ -2,8 +2,7 @@
 
 namespace UsuariosApp.Domain.Interfaces.Repositories
 {
-    public interface IPerfilRepository
+    public interface IClienteRepository : IRepositoryBase<Cliente>
     {
-        Perfil? ObterPorNome(string nome);
     }
 }

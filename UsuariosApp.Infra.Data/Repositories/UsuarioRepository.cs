@@ -5,17 +5,8 @@ using UsuariosApp.Infra.Data.Contexts;
 
 namespace UsuariosApp.Infra.Data.Repositories
 {
-    public class UsuarioRepository : IUsuarioRepository
+    public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
     {
-        public void Add(Usuario usuario)
-        {
-            using (var dataContext = new DataContext())
-            {
-                dataContext.Add(usuario);
-                dataContext.SaveChanges();
-            }
-        }
-
         public bool Verify(string email)
         {
             using (var dataContext = new DataContext())
@@ -26,13 +17,12 @@ namespace UsuariosApp.Infra.Data.Repositories
             }
         }
 
-        public Usuario Find(string email, string senha)
+        public Usuario? Find(string email, string senha)
         {
             using (var dataContext = new DataContext())
             {
                 return dataContext
                     .Set<Usuario>()
-                    .Include(u => u.Perfil)
                     .Where(u => u.Email.Equals(email)
                              && u.Senha.Equals(senha))
                     .FirstOrDefault();
