@@ -1,0 +1,15 @@
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\bin\Debug\net8.0\UsuariosApp.Infra.Security.deps.json
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\bin\Debug\net8.0\UsuariosApp.Infra.Security.dll
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\bin\Debug\net8.0\UsuariosApp.Infra.Security.pdb
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\obj\Debug\net8.0\UsuariosApp.Infra.Security.csproj.AssemblyReference.cache
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\obj\Debug\net8.0\UsuariosApp.Infra.Security.GeneratedMSBuildEditorConfig.editorconfig
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\obj\Debug\net8.0\UsuariosApp.Infra.Security.AssemblyInfoInputs.cache
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\obj\Debug\net8.0\UsuariosApp.Infra.Security.AssemblyInfo.cs
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\obj\Debug\net8.0\UsuariosApp.Infra.Security.csproj.CoreCompileInputs.cache
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\obj\Debug\net8.0\UsuariosApp.Infra.Security.dll
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\obj\Debug\net8.0\refint\UsuariosApp.Infra.Security.dll
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\obj\Debug\net8.0\UsuariosApp.Infra.Security.pdb
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\obj\Debug\net8.0\ref\UsuariosApp.Infra.Security.dll
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\bin\Debug\net8.0\UsuariosApp.Domain.dll
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\bin\Debug\net8.0\UsuariosApp.Domain.pdb
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Infra.Security\obj\Debug\net8.0\UsuariosApp.Infra.Security.csproj.CopyComplete

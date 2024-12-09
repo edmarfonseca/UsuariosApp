@@ -1,0 +1,12 @@
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Domain\bin\Debug\net8.0\UsuariosApp.Domain.deps.json
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Domain\bin\Debug\net8.0\UsuariosApp.Domain.dll
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Domain\bin\Debug\net8.0\UsuariosApp.Domain.pdb
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Domain\obj\Debug\net8.0\UsuariosApp.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Domain\obj\Debug\net8.0\UsuariosApp.Domain.AssemblyInfoInputs.cache
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Domain\obj\Debug\net8.0\UsuariosApp.Domain.AssemblyInfo.cs
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Domain\obj\Debug\net8.0\UsuariosApp.Domain.csproj.CoreCompileInputs.cache
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Domain\obj\Debug\net8.0\UsuariosApp.Domain.dll
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Domain\obj\Debug\net8.0\refint\UsuariosApp.Domain.dll
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Domain\obj\Debug\net8.0\UsuariosApp.Domain.pdb
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Domain\obj\Debug\net8.0\ref\UsuariosApp.Domain.dll
+C:\CSharp_SQS_Manha\UsuariosApp\UsuariosApp.Domain\obj\Debug\net8.0\UsuariosApp.Domain.csproj.AssemblyReference.cache

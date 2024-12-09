@@ -1,0 +1,6 @@
+{
+  "UsuariosApp.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\CSharp_SQS_Manha\\UsuariosApp\\UsuariosApp.API",
+  "UsuariosApp.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\CSharp_SQS_Manha\\UsuariosApp\\UsuariosApp.Domain",
+  "UsuariosApp.Infra.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\CSharp_SQS_Manha\\UsuariosApp\\UsuariosApp.Infra.Data",
+  "UsuariosApp.Infra.Security, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\CSharp_SQS_Manha\\UsuariosApp\\UsuariosApp.Infra.Security"
+}
